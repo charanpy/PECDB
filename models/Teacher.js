@@ -1,25 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
 
-const { ObjectId } = mongoose.Schema.Types;
-
-const TeacherSchema = new mongoose.model({
-  user: {
-    type: ObjectId,
-    ref: 'User',
-  },
-  department: [
-    {
-      type: ObjectId,
-      ref: 'Department',
-    },
-  ],
-  name: {
-    type: String,
-    trim: true,
-    lowercase: true,
-  },
+const TeacherSchema = new mongoose.Schema({
+  id: { type: String, default: uuidv4, unique: true },
+  name: { type: String, require: true },
+  phoneNumber: { type: String, require: true },
+  email: { type: String, require: true, unique: true },
+  mobileNumber: { type: String, require: true },
+  password: { type: String, require: true },
+  isEmailVerified: { type: Boolean, default: false },
+  isBlocked: { type: Boolean, default: false },
+  isDeleted: { type: Boolean, default: false },
+  isDefaultPassword: { type: Boolean, default: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
-const Teacher = mongoose.model('Teacher', TeacherSchema);
-
-module.exports = Teacher;
+module.exports = mongoose.model("Teacher", TeacherSchema);
