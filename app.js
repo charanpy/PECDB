@@ -14,6 +14,9 @@ app.use(express.json());
 app.use(cors());
 
 // routes middleware
+const departmentRoutes = require('./routes/department');
+
+app.use('/api/v1/department', departmentRoutes);
 
 app.all('*', (req, _, next) => {
   next(new AppError(`can't find ${req.originalUrl} on this server`, 404));
