@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema(
   {
-    rollNo: {
+    provider: {
       type: String,
       required: [true, 'Roll no is required'],
       unique: [true, 'Roll no already exist'],
       trim: true,
+      lowercase: true,
     },
     password: {
       type: String,
@@ -27,6 +29,16 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+UserSchema.pre('save', async function (next) {
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+//~Compare Password
+UserSchema.methods.comparePassword = async function (dbPassword, userPassword) {
+  return await bcrypt.compare(dbPassword, userPassword);
+};
 
 const User = mongoose.model('User', UserSchema);
 

@@ -1,6 +1,7 @@
 const AppError = require('../lib/AppError');
 
 const handleValidationError = (err) => {
+  console.log('Hey');
   const errors = Object.values(err.errors).map((el) => el.message);
 
   const message = `Invalid input data ${errors.join('.')}`;
@@ -46,14 +47,15 @@ const sendError = (err, res) => {
 };
 
 module.exports = (err, req, res, next) => {
-  console.log(err);
+  // console.log(err, err?.name === 'ValidationError', err?.code);
   err.statusCode = err.statusCode || 500;
 
   err.status = err.status || 'error';
 
   let error = { ...err, message: err.message };
+  console.log(error);
 
-  if (error.name === 'ValidationError') {
+  if (err.name === 'ValidationError') {
     error = handleValidationError(error);
   }
   if (error.name === 'TokenExpiredError') {
@@ -69,5 +71,6 @@ module.exports = (err, req, res, next) => {
     error = handleMulterError();
 
   if (error.name === 'JsonWebTokenError') error = handleWebTokenError(error);
+
   sendError(error, res);
 };
