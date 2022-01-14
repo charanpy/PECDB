@@ -7,6 +7,7 @@ const SubjectSchema = new mongoose.Schema(
       required: [true, 'Subject name is required'],
       trim: true,
       lowercase: true,
+      unique: [true, 'Subject name already exists'],
     },
     // department: [
     //   {

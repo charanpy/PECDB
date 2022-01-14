@@ -29,9 +29,9 @@ exports.getClass = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteClass = catchAsync(async (req, res) => {
+exports.deleteClass = catchAsync(async (req, res, next) => {
   const grade = await ClassSection.deleteOne({ _id: req.params.classId });
-  if (!grade.deletedCount) throw new AppError('Unable to delete', 400);
+  if (!grade.deletedCount) return next(new AppError('Unable to delete', 400));
 
   return res.status(200).json({
     status: 'success',
