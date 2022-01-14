@@ -15,7 +15,8 @@ const handleCastErrorDb = (err) => {
 };
 
 const handleDuplicateFieldErrorDb = (err) => {
-  const keyField = Object.keys(err.keyValue)[0];
+  const keys = Object.keys(err.keyValue);
+  const keyField = keys?.length ? keys.join(',') : '';
   return new AppError(`Please use different ${keyField}`, 400);
 };
 

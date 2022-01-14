@@ -8,18 +8,18 @@ const SubjectSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    department: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Department',
-      },
-    ],
-    semester: {
-      type: Number,
-      max: 8,
-      min: 1,
-      required: [true, 'Semester is required'],
-    },
+    // department: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Department',
+    //   },
+    // ],
+    // semester: {
+    //   type: Number,
+    //   max: 8,
+    //   min: 1,
+    //   required: [true, 'Semester is required'],
+    // },
     elective: {
       type: Boolean,
       default: false,

@@ -2,9 +2,15 @@ const mongoose = require('mongoose');
 
 const ClassSectionSchema = new mongoose.Schema(
   {
-    classSection: {
+    class: {
       type: String,
       required: [true, 'Class is required'],
+      trim: true,
+      lowercase: true,
+    },
+    section: {
+      type: String,
+      required: [true, 'Section is required'],
       trim: true,
       lowercase: true,
     },
@@ -18,7 +24,7 @@ const ClassSectionSchema = new mongoose.Schema(
   }
 );
 
-ClassSectionSchema.index({ classSection: 1, department: 1 }, { unique: true });
+ClassSectionSchema.index({ department: 1, section: 1 }, { unique: true });
 
 const ClassSection = mongoose.model('ClassSection', ClassSectionSchema);
 

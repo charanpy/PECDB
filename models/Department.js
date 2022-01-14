@@ -7,6 +7,7 @@ const DepartmentSchema = new mongoose.Schema(
       required: [true, 'Department name is required'],
       trim: true,
       lowercase: true,
+      unique: [true, 'Department name must be unique'],
     },
     code: {
       type: String,
@@ -19,7 +20,7 @@ const DepartmentSchema = new mongoose.Schema(
   }
 );
 
-DepartmentSchema.index({ deptName: 1, code: 1 }, { unique: true });
+// DepartmentSchema.index({ deptName: 1, code: 1 }, { unique: true });
 
 const Department = mongoose.model('Department', DepartmentSchema);
 

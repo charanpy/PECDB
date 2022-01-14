@@ -30,3 +30,22 @@ exports.deleteDepartment = catchAsync(async (req, res) => {
     status: 'success',
   });
 });
+
+exports.editDepartment = catchAsync(async (req, res) => {
+  const { departmentId } = req.params;
+  const { deptName, code } = req.body;
+
+  const department = await Department.findByIdAndUpdate(
+    departmentId,
+    {
+      deptName,
+      code,
+    },
+    { runValidators: true }
+  );
+
+  return res.status(200).json({
+    status: 'success',
+    department,
+  });
+});
