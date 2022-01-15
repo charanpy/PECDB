@@ -1,7 +1,7 @@
 const APIFeatures = require('../lib/ApiFeatures');
 const AppError = require('../lib/AppError');
 const catchAsync = require('../lib/catchAsync');
-const { generateToken, verifyToken } = require('../lib/jwt');
+const { generateToken } = require('../lib/jwt');
 const Student = require('../models/Student');
 
 exports.createStudent = catchAsync(async (req, res, next) => {
