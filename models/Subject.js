@@ -9,18 +9,6 @@ const SubjectSchema = new mongoose.Schema(
       lowercase: true,
       unique: [true, 'Subject name already exists'],
     },
-    // department: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Department',
-    //   },
-    // ],
-    // semester: {
-    //   type: Number,
-    //   max: 8,
-    //   min: 1,
-    //   required: [true, 'Semester is required'],
-    // },
     elective: {
       type: Boolean,
       default: false,

@@ -142,22 +142,6 @@ exports.getStudent = catchAsync(async (req, res) => {
   });
 });
 
-exports.protect = catchAsync(async (req, res, next) => {
-  const token = req.headers['authorization'];
-  if (!token) return next(new AppError('Please login', 401));
-  const decoded = await verifyToken(token, process.env.JWT_SECRET);
-
-  if (!decoded || !decoded?.userId) {
-    return next(new AppError('Please login', 401));
-  }
-
-  const user = await Student.findById(decoded?.userId);
-
-  if (!user) return next(new AppError('Please login', 401));
-  req.user = user;
-  next();
-});
-
 exports.getMe = catchAsync(async (req, res, next) => {
   return res.status(200).json({
     status: 'success',

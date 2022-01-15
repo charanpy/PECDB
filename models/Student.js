@@ -73,6 +73,14 @@ const StudentSchema = new mongoose.Schema(
     photo: {
       type: String,
     },
+    role: {
+      type: String,
+      default: 'student',
+      enum: {
+        values: ['student'],
+        message: '{VALUE} role not available',
+      },
+    },
   },
   {
     timestamps: true,

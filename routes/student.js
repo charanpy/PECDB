@@ -5,9 +5,10 @@ const {
   updateStudent,
   deleteStudent,
   login,
-  protect,
+  // protect,
   getMe,
 } = require('../controllers/student');
+const { protect } = require('../controllers/user');
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ const {
 
 router.route('/').get(getStudent).post(createStudentValidator, createStudent);
 
-router.route('/me').get(protect, getMe);
+router.route('/me').get(protect('student'), getMe);
 router.route('/login').post(studentLoginValidator, login);
 
 router
