@@ -8,21 +8,16 @@ const {
 
 const router = express.Router();
 
-const { isValid, validators } = require('../lib/validators');
+const { validators, editSubjectValidator } = require('../lib/validators');
 
 router
   .route('/')
   .get(getSubject)
-  .post(validators.createSubjectValidator, isValid, createSubject);
+  .post(validators.createSubjectValidator, createSubject);
 
 router
   .route('/:subjectId')
-  .put(
-    validators.createSubjectValidator,
-    validators.deleteSubjectValidator,
-    isValid,
-    editSubject
-  )
-  .delete(validators.deleteSubjectValidator, isValid, deleteSubject);
+  .put(editSubjectValidator, editSubject)
+  .delete(validators.deleteSubjectValidator, deleteSubject);
 
 module.exports = router;

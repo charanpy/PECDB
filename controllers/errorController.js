@@ -22,7 +22,7 @@ const handleDuplicateFieldErrorDb = (err) => {
 };
 
 const handleJwtTokenExpire = () => {
-  return new AppError('Token has been expired!.Please register again', 401);
+  return new AppError('Token has been expired!.Please login again', 401);
 };
 
 const handleMulterError = () => {
@@ -47,7 +47,7 @@ const sendError = (err, res) => {
 };
 
 module.exports = (err, req, res, next) => {
-  // console.log(err, err?.name === 'ValidationError', err?.code);
+  console.log(err);
   err.statusCode = err.statusCode || 500;
 
   err.status = err.status || 'error';

@@ -18,11 +18,13 @@ const departmentRoutes = require('./routes/department');
 const classSectionRoutes = require('./routes/classSection');
 const subjectRoutes = require('./routes/subject');
 const userRoutes = require('./routes/user');
+const studentRoutes = require('./routes/student');
 
 app.use('/api/v1/department', departmentRoutes);
 app.use('/api/v1/grade', classSectionRoutes);
 app.use('/api/v1/subject', subjectRoutes);
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/student', studentRoutes);
 
 app.all('*', (req, _, next) => {
   next(new AppError(`can't find ${req.originalUrl} on this server`, 404));

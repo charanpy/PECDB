@@ -7,19 +7,21 @@ const {
   deleteDepartment,
   editDepartment,
 } = require('../controllers/department');
-const { isValid, validators } = require('../lib/validators');
 
-router.route('/').get(getDepartments).post(
-  validators.deptNameValidator,
-  validators.deptCodeValidator,
-  // Check if any error in user data
-  isValid,
-  createDepartment
-);
+const {
+  validators,
+  createDepartmentValidator,
+  updateDepartmentValidator,
+} = require('../lib/validators');
+
+router
+  .route('/')
+  .get(getDepartments)
+  .post(createDepartmentValidator, createDepartment);
 
 router
   .route('/:departmentId')
-  .delete(validators.deleteDeptValidator, isValid, deleteDepartment)
-  .put(validators.deleteDeptValidator, validators.deptNameValidator, validators.deptCodeValidator, isValid, editDepartment)
+  .delete(validators.deleteDeptValidator, deleteDepartment)
+  .put(updateDepartmentValidator, editDepartment);
 
 module.exports = router;
