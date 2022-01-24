@@ -5,6 +5,7 @@ require('dotenv').config();
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const helmet = require('helmet');
+const compression = require('compression');
 
 // project files
 const AppError = require('./lib/AppError');
@@ -15,10 +16,14 @@ const app = express();
 // middleware
 app.use(express.json());
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 app.use(mongoSanitize());
 app.use(xss());
-
+app.use(compression());
 // routes middleware
 const departmentRoutes = require('./routes/department');
 const classSectionRoutes = require('./routes/classSection');
