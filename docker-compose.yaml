@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: 'pec-backend'
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - '4000:4000'
